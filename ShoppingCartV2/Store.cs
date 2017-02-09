@@ -26,6 +26,8 @@ namespace ShoppingCartV2
             MyStocks.Add(product1);
             MyStocks.Add(product2);
             MyStocks.Add(product3);
+            MyStocks.Add(product4);
+            MyStocks.Add(product5);
 
             MySales = new List<SoldProduct>();
             Console.WriteLine("Store is Ready");
