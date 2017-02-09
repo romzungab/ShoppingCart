@@ -94,13 +94,21 @@ namespace ShoppingCartV2
         {
             int pNumber = GetNumberInput("\tEnter the product number:");
             int quantity = GetNumberInput("\tEnter the quantity: ");
-            Console.WriteLine(pNumber + " " + quantity);
-
             StockedProduct product = MyStore.MyStocks.Find(p => p.ProductNumber == pNumber);
             if (product != null)
             {
-                SoldProduct addedProduct = new SoldProduct(product.Name, product.Price, product.AvailableStock, product.ProductNumber, quantity);
-                MyShoppingCart.AddToCart(addedProduct);
+              
+                //check if product is in the cart already
+                if (MyShoppingCart.ProductExists(product.ProductNumber))
+                {
+                    var productInCart = MyShoppingCart.GetProduct(product.ProductNumber);
+                    productInCart.Quantity = productInCart.Quantity + quantity;               
+                 }
+                else
+                {
+                    SoldProduct addedProduct = new SoldProduct(product.Name, product.Price, product.AvailableStock, product.ProductNumber, quantity);
+                    MyShoppingCart.AddToCart(addedProduct);
+                }
                 product.AvailableStock = product.AvailableStock - quantity;
             }
             else

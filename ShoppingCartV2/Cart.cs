@@ -22,10 +22,11 @@ namespace ShoppingCartV2
         }
 
 
-        public void EmptyCart() {
+        public void EmptyCart()
+        {
             MyCart.Clear();
         }
-        
+
         public override string ToString()
         {
             if (MyCart.Count > 0)
@@ -59,6 +60,19 @@ namespace ShoppingCartV2
             if (MyCart.Count > 0)
                 return true;
             else return false;
+        }
+
+        public bool ProductExists(int productNumber)
+        {
+            if (MyCart.Find(ap => ap.ProductNumber == productNumber) == null)
+                return false;
+            else return true;
+
+        }
+
+        public SoldProduct GetProduct(int productNumber)
+        {
+            return MyCart.Find(ap => ap.ProductNumber == productNumber);
         }
     }
 }
