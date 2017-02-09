@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ShoppingCartV2.Cart">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAABAAAAAEAAAAAAAAAAAAgAAAAAAAAAAAACA=</HashCode>
+      <FileName>Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCartV2.Product">
+    <Position X="1" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCartV2.Shopping">
+    <Position X="7.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAABAABAAAAAAABAAAAAEAQAAAIBAABEABAAA=</HashCode>
+      <FileName>Shopping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCartV2.SoldProduct">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>SoldProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCartV2.StockedProduct">
+    <Position X="3" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAgAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>StockedProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCartV2.Store">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAACAAAAAAAAABAAAABAIAAAAAAAABQAAAAAAAA=</HashCode>
+      <FileName>Store.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
