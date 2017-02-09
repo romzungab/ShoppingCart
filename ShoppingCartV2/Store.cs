@@ -15,9 +15,12 @@ namespace ShoppingCartV2
         {
             Console.WriteLine("Initializing Store");
             StoreName = name;
+
             StockedProduct product1 = new StockedProduct("Laptop", 1700.12f, 12,1);
             StockedProduct product2 = new StockedProduct("Phone", 501.20f, 12,2);
             StockedProduct product3 = new StockedProduct("Tablet", 307.30f, 12,3);
+            StockedProduct product4 = new StockedProduct("Charger", 10.20f, 12, 4);
+            StockedProduct product5 = new StockedProduct("Watch", 70.30f, 12, 5);
 
             MyStocks = new List<StockedProduct>();
             MyStocks.Add(product1);
