@@ -177,14 +177,14 @@ namespace ShoppingCartV2
             ShowMyCart();
             int pNumber = 0;
             do {
-                pNumber = GetNumberInput("\tEnter the product number to remove from cart:");
+                pNumber = GetNumberInput("\n\tEnter a product from your cart.\n\tEnter the product number to remove from cart:");
             } while (!MyShoppingCart.ProductExists(pNumber));
 
             var productFromCart = MyShoppingCart.GetProduct(pNumber);
 
             int quantity = 0;
             do {
-                quantity = GetNumberInput("\nEnter the a number less or equal from the number of items in your cart.\tEnter the quantity to remove from your cart:");
+                quantity = GetNumberInput("\n\tEnter the a number less or equal from the number of items in your cart.\n\tEnter the quantity to remove from your cart:");
             } while (quantity == 0 || quantity > productFromCart.Quantity);
 
             MyShoppingCart.Remove(productFromCart.ProductNumber, quantity);
