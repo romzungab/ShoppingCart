@@ -75,6 +75,10 @@ namespace ShoppingCartV2
             return MyStocks.Find(ap => ap.ProductNumber == productNumber);
         }
 
+        public void AddToStock(int productNumber, int quantity) {
+            StockedProduct product = MyStocks.Find(p => p.ProductNumber == productNumber);
+            product.AvailableStock = product.AvailableStock + quantity;
+        }
 
     }
 

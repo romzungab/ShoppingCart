@@ -19,7 +19,7 @@ namespace ShoppingCartV2
         public override string ToString()
         {
             StringBuilder soldProductString = new StringBuilder();
-            soldProductString.Append("\n\t" + Name + "\t" + Price + "\t" + Quantity + "\t" + Quantity * Price);
+            soldProductString.Append("\n\t" + ProductNumber +"\t" + Name + "\t" + Price + "\t" + Quantity + "\t" + Quantity * Price);
             return soldProductString.ToString();
         }
     }

@@ -36,7 +36,7 @@ namespace ShoppingCartV2
                 cartString.Append("\n\t**********************************************");
                 cartString.Append("\n\tYou have the following products in your cart");
                 cartString.Append("\n\t**********************************************");
-                cartString.Append("\n\n\t Name\tPrice\tQty\tAmount\n");
+                cartString.Append("\n\n\t Number\t Name\tPrice\tQty\tAmount\n");
                 foreach (SoldProduct p in MyCart)
                 {
                     cartString.Append(p.ToString());
@@ -73,6 +73,20 @@ namespace ShoppingCartV2
         public SoldProduct GetProduct(int productNumber)
         {
             return MyCart.Find(ap => ap.ProductNumber == productNumber);
+        }
+
+        public bool Remove(SoldProduct product) {
+            return MyCart.Remove(product);
+        }
+
+        public void Remove(int productNumber, int quantity)
+        {
+            var soldProduct = MyCart.Find(p => p.ProductNumber == productNumber);
+            Console.WriteLine(soldProduct.Quantity);
+            soldProduct.Quantity = soldProduct.Quantity - quantity;
+            if (soldProduct.Quantity == 0) {
+                Remove(soldProduct);
+            }
         }
     }
 }

@@ -28,6 +28,7 @@ namespace ShoppingCartV2
             Console.WriteLine("\t3\t-\tShow my Cart");
             Console.WriteLine("\t4\t-\tCheckout");
             Console.WriteLine("\t5\t-\tEmpty my Cart");
+            Console.WriteLine("\t6\t-\tRemove Item from Cart");
             Console.WriteLine("\t0\t-\tExit");
 
             task = Console.ReadLine();
@@ -47,6 +48,9 @@ namespace ShoppingCartV2
                     break;
                 case "5":
                     EmptyCart();
+                    break;
+                case "6":
+                    RemoveProductFromCart();
                     break;
                 case "0":
                     Exit();
@@ -168,6 +172,26 @@ namespace ShoppingCartV2
             {
                 Console.WriteLine("You have an already empty cart");
             }
+        }
+        public static void RemoveProductFromCart() {
+            ShowMyCart();
+            int pNumber = 0;
+            do {
+                pNumber = GetNumberInput("\tEnter the product number to remove from cart:");
+            } while (!MyShoppingCart.ProductExists(pNumber));
+
+            var productFromCart = MyShoppingCart.GetProduct(pNumber);
+
+            int quantity = 0;
+            do {
+                quantity = GetNumberInput("\nEnter the a number less or equal from the number of items in your cart.\tEnter the quantity to remove from your cart:");
+            } while (quantity == 0 || quantity > productFromCart.Quantity);
+
+            MyShoppingCart.Remove(productFromCart.ProductNumber, quantity);
+                     
+            MyStore.AddToStock(productFromCart.ProductNumber, quantity);
+
+            ShowMyCart();
         }
 
         public static void Exit()
