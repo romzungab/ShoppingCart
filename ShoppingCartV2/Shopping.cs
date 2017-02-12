@@ -6,6 +6,7 @@ namespace ShoppingCartV2
     {
         static Store MyStore;
         static Cart MyShoppingCart;
+        
         public static void Main(string[] args)
         {
             MyStore = new Store("Tech Store");
@@ -174,24 +175,32 @@ namespace ShoppingCartV2
             }
         }
         public static void RemoveProductFromCart() {
-            ShowMyCart();
-            int pNumber = 0;
-            do {
-                pNumber = GetNumberInput("\n\tEnter a product from your cart.\n\tEnter the product number to remove from cart:");
-            } while (!MyShoppingCart.ProductExists(pNumber));
+            if (MyShoppingCart.IsNotEmpty())
+            {
+                ShowMyCart();
+                int pNumber = 0;
+                do
+                {
+                    pNumber = GetNumberInput("\n\tEnter a product from your cart.\n\tEnter the product number to remove from cart:");
+                } while (!MyShoppingCart.ProductExists(pNumber));
 
-            var productFromCart = MyShoppingCart.GetProduct(pNumber);
+                var productFromCart = MyShoppingCart.GetProduct(pNumber);
 
-            int quantity = 0;
-            do {
-                quantity = GetNumberInput("\n\tEnter the a number less or equal from the number of items in your cart.\n\tEnter the quantity to remove from your cart:");
-            } while (quantity == 0 || quantity > productFromCart.Quantity);
+                int quantity = 0;
+                do
+                {
+                    quantity = GetNumberInput("\n\tEnter the a number less or equal from the number of items in your cart.\n\tEnter the quantity to remove from your cart:");
+                } while (quantity == 0 || quantity > productFromCart.Quantity);
 
-            MyShoppingCart.Remove(productFromCart.ProductNumber, quantity);
-                     
-            MyStore.AddToStock(productFromCart.ProductNumber, quantity);
+                MyShoppingCart.Remove(productFromCart.ProductNumber, quantity);
 
-            ShowMyCart();
+                MyStore.AddToStock(productFromCart.ProductNumber, quantity);
+
+                ShowMyCart();
+            }
+            else {
+                Console.WriteLine("You have an empty cart");
+            }
         }
 
         public static void Exit()

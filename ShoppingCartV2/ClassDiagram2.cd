@@ -3,7 +3,7 @@
   <Class Name="ShoppingCartV2.Cart">
     <Position X="5.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAABAAAAAEAAAAAAAAAAAAgAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAACAAAAADAAAAAEAAAABAAAAAAAgAAAAAAACAAAACA=</HashCode>
       <FileName>Cart.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,7 +17,7 @@
   <Class Name="ShoppingCartV2.Shopping">
     <Position X="7.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAABAABAAAAAAABAAAAAEAQAAAIBAABEABAAA=</HashCode>
+      <HashCode>AAAAgAAAABAABAAAEAAABAAAAAEAQAAAIBAABEQBAAA=</HashCode>
       <FileName>Shopping.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -36,9 +36,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ShoppingCartV2.Store">
-    <Position X="5.25" Y="3.5" Width="1.5" />
+    <Position X="5.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAQAACAAAAAAAAABAAAABAIAAAAAAAABQAAAAAAAA=</HashCode>
+      <HashCode>AAAAQAACAAAAAAAAABAAAABAIAAAABAAABQAAAAAAAA=</HashCode>
       <FileName>Store.cs</FileName>
     </TypeIdentifier>
   </Class>
