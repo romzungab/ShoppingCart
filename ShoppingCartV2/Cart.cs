@@ -45,8 +45,8 @@ namespace ShoppingCartV2
                 }
                 cartString.Append("\n\t**********************************************");
                 cartString.Append("\n\tAMOUNT:" + total);
-                float gst = total * .12f;
-                cartString.Append("\n\tGST (12%):" + gst);
+                float gst = total * .15f;
+                cartString.Append("\n\tGST (15%):" + gst);
                 total = total + gst;
                 cartString.Append("\n\tTOTAL:" + total);
                 cartString.Append("\n\t**********************************************");

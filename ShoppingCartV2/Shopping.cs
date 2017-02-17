@@ -97,28 +97,35 @@ namespace ShoppingCartV2
 
         public static void AddProductToCart()
         {
-            int pNumber = GetNumberInput("\tEnter the product number:");
-            int quantity = GetNumberInput("\tEnter the quantity: ");
-            StockedProduct product = MyStore.MyStocks.Find(p => p.ProductNumber == pNumber);
-            if (product != null)
+            Console.WriteLine("Do you want to proceed adding a product to cart?(y/n)");
+            string ans = Console.ReadLine();
+
+            if (ans.Equals("Y") || ans.Equals("y"))
             {
-              
-                //check if product is in the cart already
-                if (MyShoppingCart.ProductExists(product.ProductNumber))
+                int pNumber = GetNumberInput("\tEnter the product number:");
+                int quantity = GetNumberInput("\tEnter the quantity: ");
+                StockedProduct product = MyStore.MyStocks.Find(p => p.ProductNumber == pNumber);
+                if (product != null)
                 {
-                    var productInCart = MyShoppingCart.GetProduct(product.ProductNumber);
-                    productInCart.Quantity = productInCart.Quantity + quantity;               
-                 }
+
+                    //check if product is in the cart already
+                    if (MyShoppingCart.ProductExists(product.ProductNumber))
+                    {
+                        var productInCart = MyShoppingCart.GetProduct(product.ProductNumber);
+                        productInCart.Quantity = productInCart.Quantity + quantity;
+                    }
+                    else
+                    {
+                        SoldProduct addedProduct = new SoldProduct(product.Name, product.Price, product.AvailableStock, product.ProductNumber, quantity);
+                        MyShoppingCart.AddToCart(addedProduct);
+                    }
+                    product.AvailableStock = product.AvailableStock - quantity;
+                }
                 else
                 {
-                    SoldProduct addedProduct = new SoldProduct(product.Name, product.Price, product.AvailableStock, product.ProductNumber, quantity);
-                    MyShoppingCart.AddToCart(addedProduct);
+                    Console.WriteLine("\n! The product you entered DOES NOT EXIST !");
                 }
-                product.AvailableStock = product.AvailableStock - quantity;
-            }
-            else
-            {
-                Console.WriteLine("\n! The product you entered DOES NOT EXIST !");
+                AddProductToCart();
             }
         }
         public static void ShowMyCart()
@@ -130,23 +137,29 @@ namespace ShoppingCartV2
         {
             if (MyShoppingCart.IsNotEmpty())
             {
-                Console.WriteLine("Checking out your cart");
-                Console.WriteLine(MyShoppingCart.ToString());
-                Console.WriteLine("Congratulations on your purchase!!");
-                Console.WriteLine("See you on your next shopping!!");
-                foreach (SoldProduct addP in MyShoppingCart.MyCart)
+                Console.WriteLine("Are you sure to Checkout?(y/n)");
+                string ans = Console.ReadLine();
+
+                if (ans.Equals("Y") || ans.Equals("y"))
                 {
-                    SoldProduct existingProduct = MyStore.GetExistingProductSold(addP.ProductNumber);
-                    if (existingProduct == null)
+                    Console.WriteLine("Checking out your cart");
+                    Console.WriteLine(MyShoppingCart.ToString());
+                    Console.WriteLine("Congratulations on your purchase!!");
+                    Console.WriteLine("See you on your next shopping!!");
+                    foreach (SoldProduct addP in MyShoppingCart.MyCart)
                     {
-                        MyStore.AddToSales(addP);
+                        SoldProduct existingProduct = MyStore.GetExistingProductSold(addP.ProductNumber);
+                        if (existingProduct == null)
+                        {
+                            MyStore.AddToSales(addP);
+                        }
+                        else
+                        {
+                            existingProduct.Quantity = existingProduct.Quantity + addP.Quantity;
+                        }
                     }
-                    else
-                    {
-                        existingProduct.Quantity = existingProduct.Quantity + addP.Quantity;
-                    }
+                    MyShoppingCart.MyCart.Clear();
                 }
-                MyShoppingCart.MyCart.Clear();
             }
             else
             {
@@ -158,16 +171,22 @@ namespace ShoppingCartV2
         {
             if (MyShoppingCart.IsNotEmpty())
             {
-                Console.WriteLine("\tReturning the following products");
-                Console.WriteLine("\n\n\t Name\tPrice\tQty\tAmount\n");
-                foreach (SoldProduct addP in MyShoppingCart.MyCart)
+                Console.WriteLine("Are you sure to Empty your Cart?(y/n)");
+                string ans = Console.ReadLine();
+
+                if (ans.Equals("Y") || ans.Equals("y"))
                 {
-                    StockedProduct toBeStocked = MyStore.GetStockedProduct(addP.ProductNumber);
-                    Console.WriteLine(addP.ToString());
-                    toBeStocked.AvailableStock = toBeStocked.AvailableStock + addP.Quantity;
+                    Console.WriteLine("\tReturning the following products");
+                    Console.WriteLine("\n\n\t Name\tPrice\tQty\tAmount\n");
+                    foreach (SoldProduct addP in MyShoppingCart.MyCart)
+                    {
+                        StockedProduct toBeStocked = MyStore.GetStockedProduct(addP.ProductNumber);
+                        Console.WriteLine(addP.ToString());
+                        toBeStocked.AvailableStock = toBeStocked.AvailableStock + addP.Quantity;
+                    }
+                    MyShoppingCart.EmptyCart();
+                    Console.WriteLine("\n\t****Cart emptied****");
                 }
-                MyShoppingCart.EmptyCart();
-                Console.WriteLine("\n\t****Cart emptied****");
             }
             else
             {
@@ -178,25 +197,34 @@ namespace ShoppingCartV2
             if (MyShoppingCart.IsNotEmpty())
             {
                 ShowMyCart();
-                int pNumber = 0;
-                do
+                Console.WriteLine("Are you sure to Remove Items from Your Cart?(y/n)");
+                string ans = Console.ReadLine();
+
+                if (ans.Equals("Y") || ans.Equals("y"))
                 {
-                    pNumber = GetNumberInput("\n\tEnter a product from your cart.\n\tEnter the product number to remove from cart:");
-                } while (!MyShoppingCart.ProductExists(pNumber));
+                    int pNumber = 0;
+                    do
+                    {
+                        pNumber = GetNumberInput("\n\tEnter a product from your cart.\n\tEnter the product number to remove from cart:");
+                    } while (!MyShoppingCart.ProductExists(pNumber));
 
-                var productFromCart = MyShoppingCart.GetProduct(pNumber);
+                    var productFromCart = MyShoppingCart.GetProduct(pNumber);
 
-                int quantity = 0;
-                do
-                {
-                    quantity = GetNumberInput("\n\tEnter the a number less or equal from the number of items in your cart.\n\tEnter the quantity to remove from your cart:");
-                } while (quantity == 0 || quantity > productFromCart.Quantity);
+                    int quantity = 0;
+                    do
+                    {
+                        quantity = GetNumberInput("\n\tEnter the a number less or equal from the number of items in your cart.\n\tEnter the quantity to remove from your cart:");
+                    } while (quantity == 0 || quantity > productFromCart.Quantity);
 
-                MyShoppingCart.Remove(productFromCart.ProductNumber, quantity);
+                    MyShoppingCart.Remove(productFromCart.ProductNumber, quantity);
 
-                MyStore.AddToStock(productFromCart.ProductNumber, quantity);
-
-                ShowMyCart();
+                    MyStore.AddToStock(productFromCart.ProductNumber, quantity);
+                    Console.WriteLine("Removed " + quantity +" "+productFromCart.Name );
+                    if (MyShoppingCart.IsNotEmpty())
+                    {
+                        ShowMyCart();
+                    }
+                }
             }
             else {
                 Console.WriteLine("You have an empty cart");
